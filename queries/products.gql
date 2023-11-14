@@ -1,0 +1,34 @@
+query Products ($first: Int!, $query: String) {
+   products: products(first: $first, query: $query) {
+    edges {
+    ...ProductsData
+    }
+  }
+  productsCarousel: products(first: $first, query: $query) {
+    edges {
+    ...ProductsData
+    }
+  }
+}
+
+fragment ProductsData on ProductEdge {
+      node {
+        id
+        images(first: 1) {
+          edges {
+            node {
+              src
+            }
+          }
+        }
+        title
+        description
+        handle
+        priceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+      } 
+  }
